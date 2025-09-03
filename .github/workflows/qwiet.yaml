@@ -1,0 +1,33 @@
+---
+# This workflow integrates ShiftLeft NG SAST with GitHub
+# Visit https://docs.shiftleft.io for help
+name: QwietScan1
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  NextGen-Static-Analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Qwiet-AllInOne-Scan
+      uses: elangosenthilnathan/Qwiet-preZero@main
+      with:
+        shiftleft-access-token: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        excludeRegex: ".*(test|Readmes).*$"
+        importGitHub: false
+        verbose: true
+        strict: false
+        wait: true
+        timeout: 30m

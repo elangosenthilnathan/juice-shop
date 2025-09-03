@@ -16,18 +16,16 @@ permissions:
   security-events: write
 
 jobs:
-  NextGen-Static-Analysis:
+  Qwiet-Static-Analysis:
     runs-on: ubuntu-latest
+    container: shiftleft/core:latest
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Qwiet-AllInOne-Scan
-      uses: elangosenthilnathan/Qwiet-preZero@main
-      with:
-        shiftleft-access-token: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-        excludeRegex: ".*(test|Readmes).*$"
-        importGitHub: false
-        verbose: true
-        strict: false
-        wait: true
-        timeout: 30m
+    - name: Run sl analyze 1
+      shell: bash
+      run: |
+        sl analyze --oss-project-dir . --verbose --wait --app "${GITHUB_REPOSITORY#*/}" .
+      env:
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}

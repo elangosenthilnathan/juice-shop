@@ -24,6 +24,6 @@ jobs:
         npm install 
         cp ./node_modules/*package-lock.json package-lock.json
         cp package.json ./node_modules/package.json
-        sl analyze --oss-project-dir ./node_modules --verbose --jssrc --package-json ./package.json --app "${GITHUB_REPOSITORY#*/}" --analysis-timeout 60m --cpg-generation-timeout 60m . 
+        sl analyze --oss-project-dir ./node_modules --verbose --app "${GITHUB_REPOSITORY#*/}" --analysis-timeout 60m --cpg-generation-timeout 60m . 
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}

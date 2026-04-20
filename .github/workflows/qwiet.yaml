@@ -10,11 +10,6 @@ on:
       - main
       - master
 
-permissions:
-  actions: read
-  contents: read
-  security-events: write
-
 jobs:
   Qwiet-Static-Analysis:
     runs-on: ubuntu-latest
@@ -26,6 +21,7 @@ jobs:
     - name: Run sl analyze 1
       shell: bash
       run: |
-        sl analyze --oss-project-dir . --verbose --jssrc --app "${GITHUB_REPOSITORY#*/}" . -- --package-json ./
+        npm install 
+        sl analyze --verbose --jssrc --app "${GITHUB_REPOSITORY#*/}" --analysis-timeout 60m --cpg-generation-timeout 60m . 
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}

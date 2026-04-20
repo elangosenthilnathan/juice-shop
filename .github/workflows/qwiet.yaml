@@ -21,7 +21,7 @@ jobs:
     - name: Run sl analyze 1
       shell: bash
       run: |
-        npm install --package-lock-only
+        npm install --package-lock-only --ignore-scripts --legacy-peer-deps
         sl analyze --oss-project-dir . --verbose --app "${GITHUB_REPOSITORY#*/}" --analysis-timeout 60m --cpg-generation-timeout 60m . 
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}

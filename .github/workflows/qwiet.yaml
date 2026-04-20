@@ -26,7 +26,6 @@ jobs:
     - name: Run sl analyze 1
       shell: bash
       run: |
-        npm install
-        sl analyze --oss-project-dir . --verbose --wait --app "${GITHUB_REPOSITORY#*/}" . -- --js.package-json ./
+        sl analyze --oss-project-dir . --verbose --jssrc --app "${GITHUB_REPOSITORY#*/}" . -- --package-json ./
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
